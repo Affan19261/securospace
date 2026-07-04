@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SecuroSpace</string>
+    <string name="app_tagline">Zero-Knowledge Cryptographic Vault</string>
+    <string name="loading_text">Initializing Crypto Engine…</string>
+    <string name="biometric_title">SecuroSpace</string>
+    <string name="biometric_subtitle">Verify your identity to unlock the vault</string>
+</resources>

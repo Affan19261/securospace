@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0a0d1a"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="40dp">
+
+    <!-- Shield Logo -->
+    <ImageView
+        android:id="@+id/splashLogo"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:src="@drawable/splash_icon"
+        android:layout_marginBottom="28dp" />
+
+    <!-- App Name -->
+    <TextView
+        android:id="@+id/splashTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SECUROSPACE"
+        android:textColor="#f0f4ff"
+        android:textSize="28sp"
+        android:fontFamily="sans-serif-medium"
+        android:letterSpacing="0.25"
+        android:layout_marginBottom="10dp" />
+
+    <!-- Tagline -->
+    <TextView
+        android:id="@+id/splashTagline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Zero-Knowledge Cryptographic Vault"
+        android:textColor="#8892b0"
+        android:textSize="13sp"
+        android:fontFamily="monospace"
+        android:gravity="center" />
+
+</LinearLayout>

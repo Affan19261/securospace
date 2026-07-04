@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SecuroSpace Splash Shield Icon (Vector Drawable) -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Shield body -->
+    <path
+        android:fillColor="#7c3aed"
+        android:pathData="M54,10 L18,26 L18,52 C18,72 34,88 54,96 C74,88 90,72 90,52 L90,26 Z" />
+
+    <!-- Shield inner highlight -->
+    <path
+        android:fillColor="#a855f7"
+        android:fillAlpha="0.4"
+        android:pathData="M54,18 L26,31 L26,52 C26,68 38,81 54,88 C70,81 82,68 82,52 L82,31 Z" />
+
+    <!-- Lock body -->
+    <path
+        android:fillColor="#00e5ff"
+        android:pathData="M54,38 C49.6,38 46,41.6 46,46 L46,50 L44,50 C42.9,50 42,50.9 42,52 L42,64 C42,65.1 42.9,66 44,66 L64,66 C65.1,66 66,65.1 66,64 L66,52 C66,50.9 65.1,50 64,50 L62,50 L62,46 C62,41.6 58.4,38 54,38 Z M58,50 L50,50 L50,46 C50,43.8 51.8,42 54,42 C56.2,42 58,43.8 58,46 L58,50 Z" />
+
+    <!-- Lock keyhole dot -->
+    <circle
+        android:fillColor="#0a0d1a"
+        android:cx="54"
+        android:cy="57"
+        android:r="3" />
+</vector>
