@@ -5,7 +5,7 @@
 <img src="https://img.shields.io/badge/Key%20Derivation-PBKDF2%20SHA--256-a855f7?style=for-the-badge" />
 <img src="https://img.shields.io/badge/Zero--Knowledge-No%20Server%20Ever-00e676?style=for-the-badge" />
 <img src="https://img.shields.io/badge/License-MIT-f0f4ff?style=for-the-badge" />
-<img src="https://img.shields.io/github/actions/workflow/status/YOUR_USERNAME/securospace/ci.yml?style=for-the-badge&label=CI%20Build" />
+<img src="https://img.shields.io/github/actions/workflow/status/Affan19261/securospace/ci.yml?style=for-the-badge&label=CI%20Build" />
 
 <br /><br />
 
@@ -23,10 +23,10 @@
 **Your personal life — tasks, finances, credentials — protected by military-grade encryption.  
 No server. No cloud. No compromise.**
 
-[🌐 **Live Demo**](https://YOUR_USERNAME.github.io/securospace) &nbsp;|&nbsp;
-[📱 **Download APK**](https://github.com/YOUR_USERNAME/securospace/releases/latest) &nbsp;|&nbsp;
-[🐛 **Report Bug**](https://github.com/YOUR_USERNAME/securospace/issues/new?template=bug_report.md) &nbsp;|&nbsp;
-[💡 **Request Feature**](https://github.com/YOUR_USERNAME/securospace/issues/new?template=feature_request.md)
+[🌐 **Live Demo**](https://Affan19261.github.io/securospace) &nbsp;|&nbsp;
+[📱 **Download APK**](https://github.com/Affan19261/securospace/releases/latest) &nbsp;|&nbsp;
+[🐛 **Report Bug**](https://github.com/Affan19261/securospace/issues/new?template=bug_report.md) &nbsp;|&nbsp;
+[💡 **Request Feature**](https://github.com/Affan19261/securospace/issues/new?template=feature_request.md)
 
 </div>
 
@@ -131,7 +131,7 @@ graph TB
 
 ```bash
 # Clone the repo
-git clone https://github.com/YOUR_USERNAME/securospace.git
+git clone https://github.com/Affan19261/securospace.git
 cd securospace
 
 # Serve with any HTTP server
@@ -139,7 +139,7 @@ python -m http.server 8000
 # → Open http://localhost:8000
 ```
 
-Or simply open the [**Live Demo**](https://YOUR_USERNAME.github.io/securospace) — no install needed.
+Or simply open the [**Live Demo**](https://Affan19261.github.io/securospace) — no install needed.
 
 ---
 
@@ -151,7 +151,7 @@ Or simply open the [**Live Demo**](https://YOUR_USERNAME.github.io/securospace) 
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/YOUR_USERNAME/securospace.git
+git clone https://github.com/Affan19261/securospace.git
 cd securospace
 
 # 2. Sync web assets into Android project
@@ -170,7 +170,7 @@ adb install app/build/outputs/apk/debug/app-debug.apk
 
 #### Option B — Download Pre-Built APK
 
-Download the latest release APK from the [**Releases page**](https://github.com/YOUR_USERNAME/securospace/releases/latest).
+Download the latest release APK from the [**Releases page**](https://github.com/Affan19261/securospace/releases/latest).
 
 > **Note**: You may need to enable *Install from unknown sources* in Android settings.
 
@@ -257,6 +257,6 @@ Distributed under the **MIT License**. See [LICENSE](LICENSE) for details.
 
 Built with 🔐 and zero trust.
 
-**[⭐ Star this repo](https://github.com/YOUR_USERNAME/securospace)** if SecuroSpace helped you take control of your privacy.
+**[⭐ Star this repo](https://github.com/Affan19261/securospace)** if SecuroSpace helped you take control of your privacy.
 
 </div>
