@@ -1,0 +1,146 @@
+name: SecuroSpace CI & Quality Assurance
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-and-test:
+    name: Validate Site & Health Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 1. Verify File Integrity & Structure
+        run: |
+          echo "Checking essential files for securospace.com..."
+          required_files=(
+            "index.html"
+            "app.html"
+            "security.html"
+            "privacy.html"
+            "terms.html"
+            "404.html"
+            "styles.css"
+            "script.js"
+            "app.js"
+            "CNAME"
+            "manifest.json"
+            "robots.txt"
+            "sitemap.xml"
+            "assets/favicon.svg"
+            "assets/og-preview.svg"
+            "DOMAIN_SETUP.md"
+          )
+
+          for file in "${required_files[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "::error file=$file::Missing required file: $file"
+              exit 1
+            else
+              echo "✓ Found $file"
+            fi
+          done
+
+      - name: 2. Verify Custom Domain Configuration
+        run: |
+          echo "Verifying CNAME..."
+          cname_content=$(cat CNAME | tr -d '[:space:]')
+          if [ "$cname_content" != "securospace.com" ]; then
+            echo "::error file=CNAME::CNAME must be 'securospace.com', found: '$cname_content'"
+            exit 1
+          fi
+          echo "✓ CNAME correctly set to securospace.com"
+
+      - name: 3. Validate JSON & Manifest Files
+        run: |
+          python -c "
+          import json, sys
+
+          # Validate manifest.json
+          with open('manifest.json', 'r') as f:
+              manifest = json.load(f)
+          assert manifest.get('name') == 'SecuroSpace | Privacy-First Life OS', 'Invalid manifest name'
+          assert manifest.get('start_url') == '/app.html', 'Invalid start_url'
+          print('✓ manifest.json is valid')
+          "
+
+      - name: 4. Zero-Telemetry & Privacy Guarantee Audit
+        run: |
+          echo "Auditing for accidental third-party analytics or tracker scripts..."
+          # Ensure no unwanted trackers are embedded
+          forbidden=("google-analytics.com" "googletagmanager.com" "connect.facebook.net" "hotjar.com" "segment.com")
+          for tracker in "${forbidden[@]}"; do
+            if grep -rn "$tracker" --include="*.html" --include="*.js" .; then
+              echo "::error::Detected forbidden tracking script: $tracker"
+              exit 1
+            fi
+          done
+          echo "✓ Zero-telemetry audit passed: No tracking scripts found"
+
+      - name: 5. End-to-End HTTP Endpoint Route Testing
+        run: |
+          python -c "
+          import urllib.request, http.server, threading, time, sys
+
+          PORT = 3000
+          handler = http.server.SimpleHTTPRequestHandler
+          httpd = http.server.HTTPServer(('127.0.0.1', PORT), handler)
+          t = threading.Thread(target=httpd.serve_forever)
+          t.daemon = True
+          t.start()
+          time.sleep(1)
+
+          endpoints = [
+              '/',
+              '/index.html',
+              '/app.html',
+              '/security.html',
+              '/privacy.html',
+              '/terms.html',
+              '/404.html',
+              '/styles.css',
+              '/script.js',
+              '/app.js',
+              '/manifest.json',
+              '/sitemap.xml',
+              '/robots.txt',
+              '/CNAME',
+              '/assets/favicon.svg',
+              '/assets/og-preview.svg'
+          ]
+
+          failed = False
+          for ep in endpoints:
+              try:
+                  url = f'http://127.0.0.1:{PORT}{ep}'
+                  res = urllib.request.urlopen(url)
+                  code = res.getcode()
+                  data = res.read()
+                  if code != 200 or len(data) == 0:
+                      print(f'FAIL [{code}]: {ep}')
+                      failed = True
+                  else:
+                      print(f'✓ [200 OK]: {ep} ({len(data)} bytes)')
+              except Exception as err:
+                  print(f'FAIL: {ep} -> {err}')
+                  failed = True
+
+          httpd.shutdown()
+          if failed:
+              sys.exit(1)
+          print('All route health checks passed successfully!')
+          "
