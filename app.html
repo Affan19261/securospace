@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="SecuroSpace Life OS — In-browser zero-knowledge encrypted workspace for daily tasks, habit streaks, private finance, and passwords."
+    />
+    <meta name="robots" content="index, follow" />
+    <title>SecuroSpace Life OS | Encrypted Workspace</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="manifest" href="manifest.json" />
+  </head>
+  <body class="app-body">
+    <!-- Top Mobile / Fallback Header -->
+    <header class="site-header" style="border-bottom: 1px solid var(--line);">
+      <div class="container nav-wrap" style="min-height: 64px;">
+        <a class="brand" href="/" aria-label="Return to SecuroSpace home">
+          <span class="brand-mark">S</span>
+          <span>SecuroSpace <span style="font-size: 0.75rem; color: var(--accent); font-weight: normal;">Life OS</span></span>
+        </a>
+
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <div class="card-status-pill" id="vaultLockStatus">
+            <span>🔒</span>
+            <span>LOCAL STORE ACTIVE</span>
+          </div>
+          <a href="/" class="secondary-button" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+            ← Exit to securospace.com
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <div class="app-layout">
+      <!-- App Sidebar Navigation -->
+      <aside class="app-sidebar">
+        <div class="app-sidebar-nav">
+          <button class="app-nav-btn active" data-pane="pane-tasks">
+            <span class="nav-icon">📌</span>
+            <span>Focus &amp; Tasks</span>
+          </button>
+
+          <button class="app-nav-btn" data-pane="pane-habits">
+            <span class="nav-icon">⚡</span>
+            <span>Habit Momentum</span>
+          </button>
+
+          <button class="app-nav-btn" data-pane="pane-finance">
+            <span class="nav-icon">💳</span>
+            <span>Private Finance</span>
+          </button>
+
+          <button class="app-nav-btn" data-pane="pane-vault">
+            <span class="nav-icon">🔐</span>
+            <span>Password Vault</span>
+          </button>
+
+          <button class="app-nav-btn" data-pane="pane-settings">
+            <span class="nav-icon">⚙️</span>
+            <span>Crypto &amp; Backups</span>
+          </button>
+        </div>
+
+        <div class="app-sidebar-footer">
+          <div class="vault-lock-indicator">
+            <span>DEVICE STORAGE</span>
+            <span style="color: var(--success);">ONLINE</span>
+          </div>
+          <a href="security.html" style="font-size: 0.78rem; color: var(--muted-soft); text-align: center;">
+            Security Architecture &amp; Spec
+          </a>
+        </div>
+      </aside>
+
+      <!-- App Main Content Workspace -->
+      <main class="app-main">
+        <!-- ==========================================
+             PANE 1: FOCUS & TASKS
+             ========================================== -->
+        <section class="app-module-pane active" id="pane-tasks">
+          <div class="app-header">
+            <div class="app-title-group">
+              <h2>Focus &amp; Task Planner</h2>
+              <p>Prioritize your highest leverage actions without distraction.</p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="task-filter-btn secondary-button active" data-filter="all" style="padding: 0.45rem 0.9rem; font-size: 0.82rem;">All</button>
+              <button class="task-filter-btn secondary-button" data-filter="active" style="padding: 0.45rem 0.9rem; font-size: 0.82rem;">Active</button>
+              <button class="task-filter-btn secondary-button" data-filter="completed" style="padding: 0.45rem 0.9rem; font-size: 0.82rem;">Completed</button>
+            </div>
+          </div>
+
+          <!-- Pomodoro Deep Work Timer -->
+          <div class="pomodoro-card">
+            <div>
+              <span class="eyebrow" style="margin-bottom: 4px; display: block;">Pomodoro Focus Sprint</span>
+              <strong style="font-size: 1.1rem;">Deep Work Cadence</strong>
+              <p style="margin: 4px 0 0; color: var(--muted); font-size: 0.88rem;">Stay immersed for 25 uninterrupted minutes.</p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+              <div class="pomodoro-time" id="pomodoroDisplay">25:00</div>
+              <div class="pomodoro-controls">
+                <button class="primary-button" id="pomodoroToggle" style="padding: 0.7rem 1.2rem;">
+                  Start Focus
+                </button>
+                <button class="secondary-button" id="pomodoroReset" style="padding: 0.7rem 1rem;">
+                  Reset
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add Task Bar -->
+          <div class="tasks-add-bar">
+            <input
+              type="text"
+              id="newTaskInput"
+              class="form-input"
+              placeholder="What needs your deep focus next? (Press Enter)..."
+              style="flex-grow: 1;"
+            />
+            <select id="newTaskPriority" class="form-select" style="width: 140px;">
+              <option value="high">High Priority</option>
+              <option value="med" selected>Med Priority</option>
+              <option value="low">Low Priority</option>
+            </select>
+            <select id="newTaskCategory" class="form-select" style="width: 140px;">
+              <option value="Focus">Focus</option>
+              <option value="Security">Security</option>
+              <option value="DevOps">DevOps</option>
+              <option value="Personal">Personal</option>
+            </select>
+            <button class="primary-button" id="addTaskBtn" style="white-space: nowrap;">
+              + Add Task
+            </button>
+          </div>
+
+          <!-- Task List Container -->
+          <div class="task-list" id="appTaskList">
+            <!-- Dynamically populated by app.js -->
+          </div>
+        </section>
+
+        <!-- ==========================================
+             PANE 2: HABIT MOMENTUM
+             ========================================== -->
+        <section class="app-module-pane" id="pane-habits">
+          <div class="app-header">
+            <div class="app-title-group">
+              <h2>Habit Momentum</h2>
+              <p>Build lasting routines with daily consistency and zero guilt mechanics.</p>
+            </div>
+          </div>
+
+          <!-- Add Habit Form -->
+          <div style="display: flex; gap: 12px; margin-bottom: 28px;">
+            <input
+              type="text"
+              id="newHabitInput"
+              class="form-input"
+              placeholder="Enter routine to cultivate (e.g. Daily Cryptographic Check, 90m Reading)..."
+              style="flex-grow: 1;"
+            />
+            <button class="primary-button" id="addHabitBtn">
+              + Track Habit
+            </button>
+          </div>
+
+          <!-- Habits Grid -->
+          <div class="habits-grid" id="appHabitsContainer">
+            <!-- Dynamically populated by app.js -->
+          </div>
+        </section>
+
+        <!-- ==========================================
+             PANE 3: PRIVATE FINANCE
+             ========================================== -->
+        <section class="app-module-pane" id="pane-finance">
+          <div class="app-header">
+            <div class="app-title-group">
+              <h2>Private Financial Ledger</h2>
+              <p>Track personal cashflow and savings without sharing banking credentials.</p>
+            </div>
+          </div>
+
+          <!-- Overview Cards -->
+          <div class="finance-overview-cards">
+            <div class="finance-card net">
+              <p>Net Monthly Balance</p>
+              <strong id="financeNetBalance">$0.00</strong>
+            </div>
+            <div class="finance-card income">
+              <p>Total Income Inflow</p>
+              <strong id="financeTotalIncome">+$0.00</strong>
+            </div>
+            <div class="finance-card expense">
+              <p>Total Expenses Outflow</p>
+              <strong id="financeTotalExpense">-$0.00</strong>
+            </div>
+          </div>
+
+          <!-- Add Transaction Form -->
+          <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 22px; margin-bottom: 28px;">
+            <span class="eyebrow" style="display: block; margin-bottom: 12px;">Log Cashflow Entry</span>
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 12px; align-items: end;">
+              <div>
+                <label style="font-size: 0.8rem; color: var(--muted); display: block; margin-bottom: 4px;">Description</label>
+                <input type="text" id="transDescInput" class="form-input" placeholder="e.g. Cloud Node, Consulting, Groceries" />
+              </div>
+              <div>
+                <label style="font-size: 0.8rem; color: var(--muted); display: block; margin-bottom: 4px;">Amount ($)</label>
+                <input type="number" id="transAmountInput" class="form-input" placeholder="0.00" step="0.01" />
+              </div>
+              <div>
+                <label style="font-size: 0.8rem; color: var(--muted); display: block; margin-bottom: 4px;">Type</label>
+                <select id="transTypeSelect" class="form-select">
+                  <option value="expense">Expense (-)</option>
+                  <option value="income">Income (+)</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size: 0.8rem; color: var(--muted); display: block; margin-bottom: 4px;">Category</label>
+                <select id="transCategorySelect" class="form-select">
+                  <option value="Tech">Tech / Infra</option>
+                  <option value="Business">Business</option>
+                  <option value="Living">Living / Housing</option>
+                  <option value="Income">Income / Retainer</option>
+                  <option value="General">General</option>
+                </select>
+              </div>
+              <div>
+                <button class="primary-button" id="addTransBtn" style="height: 46px;">
+                  Add Entry
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Transactions Table -->
+          <div style="overflow-x: auto; background: rgba(0,0,0,0.2); border-radius: var(--radius-md); border: 1px solid var(--line);">
+            <table class="finance-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Description</th>
+                  <th>Category</th>
+                  <th>Amount</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="financeTableBody">
+                <!-- Dynamically populated by app.js -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ==========================================
+             PANE 4: PASSWORD VAULT & GENERATOR
+             ========================================== -->
+        <section class="app-module-pane" id="pane-vault">
+          <div class="app-header">
+            <div class="app-title-group">
+              <h2>Encrypted Password Vault</h2>
+              <p>Hardware-accelerated zero-knowledge credential store and generator.</p>
+            </div>
+          </div>
+
+          <div class="vault-split">
+            <!-- Left Column: Credential Items List -->
+            <div>
+              <!-- Search and Add Header -->
+              <div style="display: flex; gap: 10px; margin-bottom: 18px;">
+                <input
+                  type="text"
+                  id="vaultSearchInput"
+                  class="form-input"
+                  placeholder="Search stored credentials and services..."
+                  style="flex-grow: 1;"
+                />
+              </div>
+
+              <!-- Quick Add Credential Form -->
+              <div style="padding: 16px; border-radius: var(--radius-md); background: rgba(255,255,255,0.02); border: 1px solid var(--line); margin-bottom: 20px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 10px;">
+                  <input type="text" id="vaultNewService" class="form-input" placeholder="Service (e.g. GitHub)" />
+                  <input type="text" id="vaultNewUser" class="form-input" placeholder="Username / Email" />
+                  <input type="password" id="vaultNewSecret" class="form-input" placeholder="Password / Key" />
+                  <button class="primary-button" id="addVaultItemBtn" style="white-space: nowrap;">
+                    Save
+                  </button>
+                </div>
+              </div>
+
+              <!-- Vault Items Container -->
+              <div id="vaultListContainer">
+                <!-- Dynamically populated by app.js -->
+              </div>
+            </div>
+
+            <!-- Right Column: Strong Password Generator Widget -->
+            <div>
+              <div class="password-generator-widget">
+                <span class="eyebrow" style="display: block; margin-bottom: 10px;">Entropy Generator</span>
+                <strong style="display: block; font-size: 1.25rem; margin-bottom: 14px;">Cryptographic Passphrase</strong>
+
+                <div class="password-display-box" id="genOutput">
+                  Generating...
+                </div>
+
+                <div style="margin-bottom: 18px;">
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--muted); margin-bottom: 6px;">
+                    <span>Password Length</span>
+                    <strong id="genLengthVal" style="color: var(--accent);">24</strong>
+                  </div>
+                  <input type="range" id="genLengthSlider" min="12" max="48" value="24" style="width: 100%; accent-color: var(--accent);" />
+                </div>
+
+                <div style="display: grid; gap: 8px; font-size: 0.9rem; margin-bottom: 20px;">
+                  <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <input type="checkbox" id="genUpper" checked style="accent-color: var(--accent);" />
+                    <span>Include Uppercase (A-Z)</span>
+                  </label>
+                  <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <input type="checkbox" id="genNums" checked style="accent-color: var(--accent);" />
+                    <span>Include Numbers (0-9)</span>
+                  </label>
+                  <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <input type="checkbox" id="genSymbols" checked style="accent-color: var(--accent);" />
+                    <span>Include Special Symbols (!@#$)</span>
+                  </label>
+                </div>
+
+                <div style="display: flex; gap: 10px;">
+                  <button class="primary-button" id="genCopyBtn" style="flex-grow: 1;">
+                    Copy Password
+                  </button>
+                  <button class="secondary-button" id="genRegenBtn" style="padding: 0 16px;" title="Regenerate">
+                    🔄
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+             PANE 5: SETTINGS & BACKUPS
+             ========================================== -->
+        <section class="app-module-pane" id="pane-settings">
+          <div class="app-header">
+            <div class="app-title-group">
+              <h2>Data Sovereignty &amp; Cryptography</h2>
+              <p>Manage local encryption keys, export portable backups, and control data boundaries.</p>
+            </div>
+          </div>
+
+          <div style="display: grid; gap: 24px; max-width: 760px;">
+            <!-- Master Key Derivation -->
+            <div style="padding: 24px; border-radius: var(--radius-lg); background: rgba(255,255,255,0.02); border: 1px solid var(--line);">
+              <span class="eyebrow" style="display: block; margin-bottom: 8px;">Master Key Security</span>
+              <strong style="font-size: 1.2rem; display: block; margin-bottom: 6px;">PBKDF2 Hardware Derivation</strong>
+              <p style="color: var(--muted); font-size: 0.94rem; margin-bottom: 16px;">
+                Enter a master passphrase to simulate client-side Web Cryptography key derivation.
+                Your passphrase never leaves this machine.
+              </p>
+              <div style="display: flex; gap: 10px;">
+                <input
+                  type="password"
+                  id="masterKeyInput"
+                  class="form-input"
+                  placeholder="Enter custom master passphrase (min 8 chars)..."
+                  style="flex-grow: 1;"
+                />
+                <button class="primary-button" id="saveMasterKeyBtn">
+                  Derive Key
+                </button>
+              </div>
+            </div>
+
+            <!-- Export / Import Snapshot -->
+            <div style="padding: 24px; border-radius: var(--radius-lg); background: rgba(255,255,255,0.02); border: 1px solid var(--line);">
+              <span class="eyebrow" style="display: block; margin-bottom: 8px;">Portability</span>
+              <strong style="font-size: 1.2rem; display: block; margin-bottom: 6px;">Encrypted JSON Workspace Snapshot</strong>
+              <p style="color: var(--muted); font-size: 0.94rem; margin-bottom: 18px;">
+                Take complete custody of your information. Download a JSON snapshot containing all tasks,
+                streaks, finance logs, and vault records, or restore from a previously exported file.
+              </p>
+              <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+                <button class="primary-button" id="exportBackupBtn">
+                  📥 Download Workspace JSON
+                </button>
+                <label class="secondary-button" style="cursor: pointer; margin: 0;">
+                  <span>📤 Restore from File</span>
+                  <input type="file" id="importBackupInput" accept=".json" style="display: none;" />
+                </label>
+              </div>
+            </div>
+
+            <!-- Danger Zone: Reset Data -->
+            <div style="padding: 24px; border-radius: var(--radius-lg); background: rgba(236,106,104,0.04); border: 1px solid rgba(236,106,104,0.3);">
+              <span class="eyebrow" style="color: var(--danger); display: block; margin-bottom: 8px;">Danger Zone</span>
+              <strong style="font-size: 1.2rem; display: block; margin-bottom: 6px;">Erase Local Data</strong>
+              <p style="color: var(--muted); font-size: 0.94rem; margin-bottom: 16px;">
+                Permanently purge all tasks, habits, finance items, and vault credentials from this browser’s local storage.
+              </p>
+              <button class="secondary-button" id="resetAllDataBtn" style="border-color: var(--danger); color: var(--danger);">
+                ⚠️ Wipe All Local Data
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="globalToast" class="toast-notification" role="status" aria-live="polite"></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

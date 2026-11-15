@@ -5,319 +5,907 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="SecuroSpace is a privacy-first personal vault for tasks, habits, finance, and passwords. Organize your life securely and privately."
+      content="SecuroSpace is a privacy-first personal vault and Life OS for tasks, habits, finance, and passwords. Zero-knowledge encryption on securospace.com."
     />
     <meta
       name="keywords"
-      content="SecuroSpace, privacy-first vault, task planner, habit tracker, finance ledger, password manager, personal productivity"
+      content="SecuroSpace, securospace.com, privacy-first vault, task planner, habit tracker, finance ledger, password manager, zero knowledge, life OS, personal productivity"
     />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="SecuroSpace" />
-    <meta property="og:title" content="SecuroSpace | Privacy-First Life OS" />
-    <meta
-      property="og:description"
-      content="Own your routines, data, and peace of mind with a private personal vault for tasks, habits, finance, and passwords."
-    />
+    <meta name="theme-color" content="#07151a" />
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- Open Graph / Facebook / LinkedIn -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://securospace.com/" />
-    <meta property="og:image" content="https://securospace.com/assets/favicon.svg" />
+    <meta property="og:title" content="SecuroSpace | Privacy-First Life OS &amp; Encrypted Vault" />
+    <meta
+      property="og:description"
+      content="Own your routines, finances, and passwords in one calm, encrypted home. Zero-knowledge privacy on securospace.com."
+    />
+    <meta property="og:image" content="https://securospace.com/assets/og-preview.svg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="SecuroSpace | Privacy-First Life OS" />
+    <meta name="twitter:url" content="https://securospace.com/" />
+    <meta name="twitter:title" content="SecuroSpace | Privacy-First Life OS &amp; Encrypted Vault" />
     <meta
       name="twitter:description"
-      content="Privacy-first personal vault for tasks, habits, finance, and passwords."
+      content="Own your routines, finances, and passwords in one calm, encrypted home on securospace.com."
     />
+    <meta name="twitter:image" content="https://securospace.com/assets/og-preview.svg" />
+
     <link rel="canonical" href="https://securospace.com/" />
-    <title>SecuroSpace | Privacy-First Life OS</title>
+    <title>SecuroSpace | Privacy-First Life OS &amp; Encrypted Vault</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
     <link rel="stylesheet" href="styles.css" />
+
+    <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "SecuroSpace",
-        "url": "https://securospace.com/",
-        "description": "A privacy-first personal vault for tasks, habits, finance, and passwords.",
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://securospace.com/?q={search_term_string}",
-          "query-input": "required name=search_term_string"
-        }
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://securospace.com/#website",
+            "url": "https://securospace.com/",
+            "name": "SecuroSpace",
+            "description": "Zero-knowledge personal vault and Life OS for tasks, habits, finance, and passwords.",
+            "publisher": {
+              "@type": "Organization",
+              "name": "SecuroSpace",
+              "url": "https://securospace.com/"
+            }
+          },
+          {
+            "@type": "SoftwareApplication",
+            "name": "SecuroSpace Life OS",
+            "operatingSystem": "Web, iOS, Android, macOS, Windows, Linux",
+            "applicationCategory": "ProductivityApplication, SecurityApplication",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            },
+            "description": "Unified privacy-first task planner, habit streak tracker, financial ledger, and zero-knowledge encrypted password vault."
+          }
+        ]
       }
     </script>
   </head>
   <body>
+    <!-- Site Header -->
     <header class="site-header">
       <div class="container nav-wrap">
-        <a class="brand" href="#top" aria-label="SecuroSpace home">
+        <a class="brand" href="/" aria-label="SecuroSpace home">
           <span class="brand-mark">S</span>
-          <span>SecuroSpace</span>
+          <span>SecuroSpace <span class="brand-domain">.com</span></span>
         </a>
 
         <nav class="nav" aria-label="Main navigation">
           <a href="#features">Features</a>
+          <a href="app.html">Live Web App <span class="nav-badge">Free</span></a>
           <a href="#security">Security</a>
+          <a href="security.html">Architecture</a>
           <a href="#pricing">Pricing</a>
           <a href="#faq">FAQ</a>
         </nav>
 
         <div class="nav-actions">
-          <a class="link-button" href="#pricing">Pricing</a>
-          <a class="primary-button" href="mailto:hello@securospace.com">Book Demo</a>
+          <a class="secondary-button" href="app.html">Launch App</a>
+          <button class="primary-button open-demo-modal" data-intent="early-access">Book Demo</button>
+        </div>
+
+        <!-- Mobile Hamburger Button -->
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Menu Drawer -->
+      <div class="mobile-drawer" id="mobileDrawer">
+        <a href="#features">Features <span>→</span></a>
+        <a href="app.html">Launch Web App <span class="nav-badge">Free Live</span></a>
+        <a href="#security">Security Overview <span>→</span></a>
+        <a href="security.html">Technical Whitepaper <span>→</span></a>
+        <a href="#pricing">Pricing Plans <span>→</span></a>
+        <a href="#faq">FAQ <span>→</span></a>
+        <a href="privacy.html">Privacy Policy <span>→</span></a>
+        <a href="terms.html">Terms of Service <span>→</span></a>
+        <div class="mobile-drawer-actions">
+          <a href="app.html" class="primary-button" style="text-align: center; justify-content: center;">Open Life OS App</a>
+          <button class="secondary-button open-demo-modal" data-intent="early-access" style="width: 100%;">Book Private Demo</button>
         </div>
       </div>
     </header>
 
     <main id="top">
+      <!-- Hero Section -->
       <section class="hero">
         <div class="container hero-grid">
           <div class="hero-copy">
-            <p class="eyebrow">Zero-knowledge personal vault</p>
-            <h1>Own your routines, data, and peace of mind.</h1>
+            <div class="eyebrow-badge">
+              <span class="pulse-dot"></span>
+              <span>ZERO-KNOWLEDGE LIFE OS • NOW LIVE ON SECUROSPACE.COM</span>
+            </div>
+            <h1>
+              Own your routines, <br />
+              <span class="gradient-text">finances &amp; vault.</span>
+            </h1>
             <p class="lead">
-              SecuroSpace combines your daily tasks, habits, finances, and private notes in one
-              encrypted home for calm, organized living.
+              SecuroSpace replaces fragmented, ad-driven productivity tools with a unified, private Life OS.
+              Your daily tasks, habits, cashflow, and passwords stay encrypted on your device with
+              hardware-accelerated Web Cryptography.
             </p>
 
             <div class="cta-row">
-              <a class="primary-button" href="mailto:hello@securospace.com">Get Early Access</a>
-              <a class="secondary-button" href="#features">Explore Features</a>
+              <a class="primary-button" href="app.html">
+                <span>Launch Web App</span>
+                <span class="button-icon">→</span>
+              </a>
+              <button class="secondary-button open-demo-modal" data-intent="early-access">
+                Get Early Access
+              </button>
             </div>
 
-            <ul class="trust-list" aria-label="Trust indicators">
-              <li>End-to-end encrypted</li>
-              <li>Private by default</li>
-              <li>Built for focus</li>
+            <ul class="trust-list" aria-label="Key trust indicators">
+              <li><span class="trust-check">✓</span> 256-bit AES-GCM Encrypted</li>
+              <li><span class="trust-check">✓</span> Zero Data Harvesting</li>
+              <li><span class="trust-check">✓</span> 100% Local-First Storage</li>
             </ul>
           </div>
 
-          <div class="hero-visual" aria-label="Product overview panel">
-            <div class="dashboard-card main-card">
-              <div class="card-header">
-                <span class="dot dot-green"></span>
-                <span class="dot dot-yellow"></span>
-                <span class="dot dot-red"></span>
+          <!-- Hero Visual / Live Interactive Preview -->
+          <div class="hero-visual" aria-label="Interactive SecuroSpace preview dashboard">
+            <div class="dashboard-card">
+              <div class="card-header-bar">
+                <div class="window-dots">
+                  <span class="dot dot-red"></span>
+                  <span class="dot dot-yellow"></span>
+                  <span class="dot dot-green"></span>
+                </div>
+                <div class="card-status-pill">
+                  <span>🔒</span>
+                  <span>ENCRYPTED VAULT ACTIVE</span>
+                </div>
               </div>
 
-              <div class="overview-grid">
-                <div class="mini-panel accent">
-                  <p>Daily Flow</p>
-                  <strong>87%</strong>
-                  <span>Focus score</span>
+              <!-- Interactive Tab Switcher -->
+              <div class="preview-tabs" role="tablist">
+                <button class="preview-tab-btn active" data-target="preview-focus" role="tab">1. Focus &amp; Tasks</button>
+                <button class="preview-tab-btn" data-target="preview-habits" role="tab">2. Habits</button>
+                <button class="preview-tab-btn" data-target="preview-finance" role="tab">3. Finance</button>
+                <button class="preview-tab-btn" data-target="preview-vault" role="tab">4. Vault</button>
+              </div>
+
+              <!-- Tab Pane 1: Focus & Tasks -->
+              <div class="preview-tab-pane active" id="preview-focus">
+                <div class="overview-grid">
+                  <div class="mini-panel accent">
+                    <p>Focus Score</p>
+                    <strong>94%</strong>
+                    <span>Deep work target achieved</span>
+                  </div>
+                  <div class="mini-panel">
+                    <p>Pomodoro Sprints</p>
+                    <strong>6 / 8</strong>
+                    <span>25m sessions completed</span>
+                  </div>
                 </div>
-                <div class="mini-panel">
-                  <p>Habits</p>
-                  <strong>12</strong>
-                  <span>Active streaks</span>
+
+                <div class="interactive-todo-list" style="margin-top: 14px;">
+                  <label class="todo-preview-item">
+                    <input type="checkbox" checked />
+                    <span>Review zero-knowledge encryption spec</span>
+                  </label>
+                  <label class="todo-preview-item">
+                    <input type="checkbox" />
+                    <span>Configure custom domain DNS for securospace.com</span>
+                  </label>
+                  <label class="todo-preview-item">
+                    <input type="checkbox" />
+                    <span>Generate new master vault recovery key</span>
+                  </label>
                 </div>
+              </div>
+
+              <!-- Tab Pane 2: Habits -->
+              <div class="preview-tab-pane" id="preview-habits">
                 <div class="mini-panel wide">
-                  <p>Finance</p>
-                  <strong>$2,430</strong>
-                  <span>Net savings this month</span>
+                  <p>Habit Momentum</p>
+                  <strong>18 Days 🔥</strong>
+                  <span>Consistency score across all routines</span>
+                </div>
+
+                <div style="margin-top: 12px; display: grid; gap: 8px;">
+                  <div class="habit-streak-preview">
+                    <span>Morning Deep Work</span>
+                    <div class="habit-dots">
+                      <span class="habit-dot completed" title="Day 1"></span>
+                      <span class="habit-dot completed" title="Day 2"></span>
+                      <span class="habit-dot completed" title="Day 3"></span>
+                      <span class="habit-dot completed" title="Day 4"></span>
+                      <span class="habit-dot completed" title="Day 5"></span>
+                      <span class="habit-dot completed" title="Day 6"></span>
+                      <span class="habit-dot completed" title="Day 7"></span>
+                    </div>
+                  </div>
+                  <div class="habit-streak-preview">
+                    <span>Hardware Token Verification</span>
+                    <div class="habit-dots">
+                      <span class="habit-dot completed"></span>
+                      <span class="habit-dot completed"></span>
+                      <span class="habit-dot completed"></span>
+                      <span class="habit-dot completed"></span>
+                      <span class="habit-dot"></span>
+                      <span class="habit-dot completed"></span>
+                      <span class="habit-dot completed"></span>
+                    </div>
+                  </div>
+                  <div class="habit-streak-preview">
+                    <span>Private Financial Logging</span>
+                    <div class="habit-dots">
+                      <span class="habit-dot completed"></span>
+                      <span class="habit-dot completed"></span>
+                      <span class="habit-dot completed"></span>
+                      <span class="habit-dot completed"></span>
+                      <span class="habit-dot completed"></span>
+                      <span class="habit-dot"></span>
+                      <span class="habit-dot completed"></span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div class="chart-bars" aria-hidden="true">
-                <span style="height: 38%"></span>
-                <span style="height: 52%"></span>
-                <span style="height: 44%"></span>
-                <span style="height: 76%"></span>
-                <span style="height: 68%"></span>
-                <span style="height: 92%"></span>
-                <span style="height: 82%"></span>
+              <!-- Tab Pane 3: Finance -->
+              <div class="preview-tab-pane" id="preview-finance">
+                <div class="mini-panel wide">
+                  <p>Net Monthly Savings</p>
+                  <strong style="color: var(--success);">+$3,850.00</strong>
+                  <span>Zero bank scraping • 100% private ledger</span>
+                </div>
+
+                <div class="chart-bars" aria-label="Visual savings chart">
+                  <span style="height: 45%" title="May"></span>
+                  <span style="height: 60%" title="Jun"></span>
+                  <span style="height: 55%" title="Jul"></span>
+                  <span style="height: 78%" title="Aug"></span>
+                  <span style="height: 70%" title="Sep"></span>
+                  <span style="height: 92%" title="Oct"></span>
+                  <span style="height: 88%" title="Nov"></span>
+                </div>
+              </div>
+
+              <!-- Tab Pane 4: Password Vault -->
+              <div class="preview-tab-pane" id="preview-vault">
+                <div class="vault-preview-card">
+                  <div class="vault-preview-row">
+                    <strong>securospace.com (Master Admin)</strong>
+                    <span style="font-size: 0.75rem; color: var(--accent);">AES-GCM</span>
+                  </div>
+                  <div class="entropy-meter">
+                    <div class="entropy-fill"></div>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; font-size: 0.82rem; color: var(--muted); margin-top: 6px;">
+                    <span>Entropy: 128 bits</span>
+                    <span style="color: var(--success); font-weight: bold;">Very Strong</span>
+                  </div>
+                </div>
+                <div style="text-align: center; margin-top: 16px;">
+                  <a href="app.html" class="outline-button" style="width: 100%; font-size: 0.85rem;">
+                    Open Full Password Vault →
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
+      <!-- Trust Badges Section -->
       <section class="logos-section">
         <div class="container logos-wrap">
-          <span>Trusted by privacy-first professionals</span>
+          <span class="logos-title">ENGINEERED FOR PRIVACY-FIRST PROFESSIONALS</span>
           <div class="logo-row">
-            <span>Northstar</span>
-            <span>Signal</span>
-            <span>Haven</span>
-            <span>Forma</span>
-            <span>Quietly</span>
+            <span class="logo-tag">🔒 ZERO-KNOWLEDGE</span>
+            <span class="logo-tag">⚡ AES-256-GCM</span>
+            <span class="logo-tag">💾 LOCAL-FIRST</span>
+            <span class="logo-tag">🛡️ OPEN STANDARDS</span>
+            <span class="logo-tag">🌐 SECUROSPACE.COM</span>
           </div>
         </div>
       </section>
 
+      <!-- Core Features Section -->
       <section id="features" class="section">
         <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Everything in one secure place</p>
-            <h2>Built to support the life you actually live.</h2>
+          <div class="section-heading narrow">
+            <p class="eyebrow">Unified Privacy Architecture</p>
+            <h2>Four life systems. One calm, encrypted sanctuary.</h2>
+            <p class="section-lead">
+              Stop juggling four different apps that monetize your browsing habits and personal schedules.
+              SecuroSpace merges your core workflows into one cohesive, distraction-free environment.
+            </p>
           </div>
 
           <div class="feature-grid">
             <article class="feature-card">
-              <div class="icon">✓</div>
-              <h3>Task Planner</h3>
-              <p>Organize priorities, capture notes, and stay focused without overwhelm.</p>
+              <div class="icon-wrap">✓</div>
+              <h3>Focus Task Planner</h3>
+              <p>
+                Organize high-impact priorities with Eisenhower matrices, custom categories, and an
+                integrated Pomodoro deep-focus timer.
+              </p>
+              <div class="feature-card-footer">
+                <span>Built-in 25m focus timer</span>
+              </div>
             </article>
+
             <article class="feature-card">
-              <div class="icon">◎</div>
-              <h3>Habit Tracker</h3>
-              <p>Turn daily momentum into consistency with private streak insights.</p>
+              <div class="icon-wrap">◎</div>
+              <h3>Habit Momentum</h3>
+              <p>
+                Build lasting positive routines without guilt. Track weekly streaks, completion heatmaps,
+                and progress metrics stored locally.
+              </p>
+              <div class="feature-card-footer">
+                <span>Zero-shame streak insights</span>
+              </div>
             </article>
+
             <article class="feature-card">
-              <div class="icon">$</div>
-              <h3>Finance Ledger</h3>
-              <p>Track spending, savings, and money habits with calm, clear visibility.</p>
+              <div class="icon-wrap">$</div>
+              <h3>Private Finance Ledger</h3>
+              <p>
+                Take full command of your cashflow without linking bank logins to third-party data
+                brokers. Track income, expenses, and savings rates privately.
+              </p>
+              <div class="feature-card-footer">
+                <span>No bank credential scraping</span>
+              </div>
             </article>
+
             <article class="feature-card">
-              <div class="icon">🔒</div>
-              <h3>Password Vault</h3>
-              <p>Store your credentials in a secure, encrypted vault that keeps control local.</p>
+              <div class="icon-wrap">🔒</div>
+              <h3>Zero-Knowledge Vault</h3>
+              <p>
+                Store master credentials, API keys, and private memos with hardware-accelerated AES-256-GCM.
+                Generate high-entropy passwords in seconds.
+              </p>
+              <div class="feature-card-footer">
+                <span>Cryptographic password generator</span>
+              </div>
             </article>
+          </div>
+
+          <!-- Feature Spotlight: Focus & Pomodoro -->
+          <div class="split-feature-row">
+            <div class="split-copy">
+              <p class="eyebrow">Deep Focus Engine</p>
+              <h3>Work with clarity. Leave digital distraction behind.</h3>
+              <p>
+                Traditional productivity apps bombard you with engagement notifications, upsells, and team pings.
+                SecuroSpace was architected for calm personal agency:
+              </p>
+              <ul class="split-bullets">
+                <li>
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                  <span><strong>Zero telemetry</strong>: No activity analytics or trackers inspect your daily habits.</span>
+                </li>
+                <li>
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                  <span><strong>Instant offline capability</strong>: Runs completely offline without an active internet connection.</span>
+                </li>
+                <li>
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                  <span><strong>Full Data Sovereignty</strong>: Export your entire life database in readable JSON or encrypted backup snapshots anytime.</span>
+                </li>
+              </ul>
+              <div style="margin-top: 24px;">
+                <a href="app.html" class="primary-button">Try Focus Mode in Browser →</a>
+              </div>
+            </div>
+
+            <div>
+              <div class="mini-panel" style="padding: 24px; background: rgba(0,0,0,0.3);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                  <span style="font-weight: 700; color: var(--accent);">Focus Sprint</span>
+                  <span class="card-status-pill">25:00</span>
+                </div>
+                <div style="background: rgba(255,255,255,0.03); border-radius: var(--radius-md); padding: 16px; border: 1px solid var(--line);">
+                  <div style="font-size: 0.85rem; color: var(--muted);">Active Priority</div>
+                  <div style="font-size: 1.2rem; font-weight: 700; margin: 4px 0;">Draft SecuroSpace Deployment Roadmap</div>
+                  <div style="display: flex; gap: 8px; margin-top: 8px;">
+                    <span class="task-priority-tag priority-high">High</span>
+                    <span style="font-size: 0.78rem; color: var(--muted-soft);">Domain: securospace.com</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
+      <!-- Security Architecture Section -->
       <section id="security" class="section alt-section">
         <div class="container split-layout">
           <div>
-            <p class="eyebrow">Privacy by design</p>
-            <h2>Your data should stay yours.</h2>
-            <p>
-              SecuroSpace is designed around a simple principle: if it matters to your life, it
-              deserves protection. We use zero-knowledge patterns and encrypted workflows so your
-              personal information remains private, accessible, and under your control.
+            <p class="eyebrow">Zero-Knowledge Cryptography</p>
+            <h2>Your data is encrypted before it ever leaves your fingers.</h2>
+            <p class="lead" style="font-size: 1rem;">
+              SecuroSpace implements client-side cryptographic isolation. When you enter a task, budget entry,
+              or password, it is derived using your private Master Passphrase and encrypted locally via the
+              browser's native Web Cryptography API.
             </p>
+
+            <div class="crypto-demo-box" style="margin-top: 28px;">
+              <div class="box-title">
+                <span>⚡ LIVE WEB CRYPTO SHA-256 TESTER</span>
+                <span>CLIENT-SIDE</span>
+              </div>
+              <label for="cryptoLiveInput" style="display: block; font-size: 0.82rem; color: var(--muted); margin-bottom: 6px;">
+                Type any secret text to compute real-time cryptographic hash:
+              </label>
+              <input
+                type="text"
+                id="cryptoLiveInput"
+                class="crypto-input"
+                placeholder="Type a password, thought, or sensitive memo..."
+                value="SecuroSpace zero-knowledge encryption 2026"
+              />
+              <div class="crypto-output-label">Computed SHA-256 Digest:</div>
+              <div id="cryptoHashOutput" class="crypto-hash-result">Computing...</div>
+            </div>
+
+            <div style="margin-top: 24px;">
+              <a href="security.html" class="outline-button">Read Full Security Whitepaper →</a>
+            </div>
           </div>
 
           <div class="security-points">
-            <div>
-              <strong>Zero-knowledge architecture</strong>
-              <p>Information is encrypted before it leaves your control.</p>
+            <div class="security-step-card">
+              <span class="step-num">1</span>
+              <div class="step-content">
+                <strong>Local Key Derivation (PBKDF2)</strong>
+                <p>
+                  Your master passphrase is never transmitted over the wire. It derives a 256-bit AES key
+                  locally using 600,000 PBKDF2 HMAC-SHA256 iterations.
+                </p>
+              </div>
             </div>
-            <div>
-              <strong>Local-first access</strong>
-              <p>Private routines stay available without exposing sensitive details.</p>
+
+            <div class="security-step-card">
+              <span class="step-num">2</span>
+              <div class="step-content">
+                <strong>Authenticated Encryption (AES-GCM)</strong>
+                <p>
+                  Every encrypted item contains a cryptographic authentication tag, preventing tampering or
+                  silent data corruption.
+                </p>
+              </div>
             </div>
-            <div>
-              <strong>Minimal noise</strong>
-              <p>Thoughtful tools help reduce distraction and digital friction.</p>
+
+            <div class="security-step-card">
+              <span class="step-num">3</span>
+              <div class="step-content">
+                <strong>Zero Knowledge Guarantee</strong>
+                <p>
+                  Even if our servers or domain host were compromised, an attacker would see only random,
+                  unreadable ciphertext. We cannot read your records, sell your data, or comply with decryption demands.
+                </p>
+              </div>
+            </div>
+
+            <div class="security-step-card">
+              <span class="step-num">4</span>
+              <div class="step-content">
+                <strong>Custom Domain Sovereignty</strong>
+                <p>
+                  Built and verified for <code>securospace.com</code> with HTTPS enforced, HTTP Strict Transport
+                  Security (HSTS), and clean isolated subdomains.
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="section stats-section">
+      <!-- Key Metrics & Stats Section -->
+      <section class="section">
         <div class="container stats-grid">
-          <div>
-            <strong>4-in-1</strong>
-            <span>Life systems</span>
+          <div class="stats-card">
+            <strong class="accent-stat">4-in-1</strong>
+            <span>Integrated Life Systems</span>
           </div>
-          <div>
-            <strong>99.9%</strong>
-            <span>Availability targets</span>
+          <div class="stats-card">
+            <strong>256-Bit</strong>
+            <span>Hardware AES Encryption</span>
           </div>
-          <div>
-            <strong>24/7</strong>
-            <span>Secure access</span>
+          <div class="stats-card">
+            <strong class="accent-stat">0</strong>
+            <span>User Data Sold or Harvested</span>
           </div>
-          <div>
-            <strong>0</strong>
-            <span>Data sale mindset</span>
+          <div class="stats-card">
+            <strong>100%</strong>
+            <span>Local-First Availability</span>
           </div>
         </div>
       </section>
 
-      <section id="pricing" class="section">
+      <!-- Interactive Pricing Section -->
+      <section id="pricing" class="section alt-section">
         <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Simple pricing</p>
-            <h2>Choose the plan that fits your life.</h2>
+          <div class="section-heading narrow">
+            <p class="eyebrow">Transparent &amp; Sovereign</p>
+            <h2>Simple, honest pricing. No tracking upsells.</h2>
+            <p class="section-lead">
+              Start free with our full-featured in-browser app. Upgrade when you need encrypted multi-device
+              sync or shared family vaults.
+            </p>
+          </div>
+
+          <!-- Billing Switcher -->
+          <div class="billing-switch-wrap">
+            <span class="billing-label active" id="labelMonthly">Monthly</span>
+            <label class="switch" aria-label="Toggle annual billing discount">
+              <input type="checkbox" id="billingToggle" />
+              <span class="slider"></span>
+            </label>
+            <span class="billing-label" id="labelAnnual">Annual</span>
+            <span class="discount-badge">SAVE 20%</span>
           </div>
 
           <div class="pricing-grid">
+            <!-- Free Starter -->
             <article class="price-card">
-              <p class="plan-name">Starter</p>
-              <div class="price">$0<span>/month</span></div>
+              <p class="plan-name">Starter Vault</p>
+              <p class="plan-desc">For individuals seeking calm, private organization.</p>
+              <div class="price" id="priceStarter">$0<span>/mo</span></div>
               <ul>
-                <li>1 vault</li>
-                <li>Task list</li>
-                <li>Habit tracking</li>
+                <li>Full Task &amp; Focus Flow Manager</li>
+                <li>Habit Streak Tracker (7-day heatmaps)</li>
+                <li>Private Financial Ledger</li>
+                <li>Local Password Vault (up to 50 credentials)</li>
+                <li>JSON Data Export &amp; Import</li>
+                <li>100% Local-first browser storage</li>
+                <li class="disabled">Multi-device zero-knowledge sync</li>
               </ul>
-              <a href="mailto:hello@securospace.com" class="secondary-button">Try for free</a>
+              <a href="app.html" class="secondary-button" style="width: 100%;">Launch Free App</a>
             </article>
 
+            <!-- Private Pro (Featured) -->
             <article class="price-card featured">
-              <div class="badge">Most popular</div>
+              <div class="badge">Most Popular</div>
               <p class="plan-name">Private Pro</p>
-              <div class="price">$12<span>/month</span></div>
+              <p class="plan-desc">For power users who demand encrypted cross-device sync.</p>
+              <div class="price" id="pricePro">$12<span>/mo</span></div>
               <ul>
-                <li>Unlimited spaces</li>
-                <li>Finance ledger</li>
-                <li>Password vault</li>
-                <li>Priority support</li>
+                <li><strong>Everything in Starter, plus:</strong></li>
+                <li>Unlimited Password &amp; Note Vaults</li>
+                <li>End-to-End Encrypted Relay Sync</li>
+                <li>Hardware Security Key Support (WebAuthn / YubiKey)</li>
+                <li>Automated Encrypted Cloud Backups</li>
+                <li>Priority Cryptographic Support</li>
+                <li>Custom vault categories &amp; tags</li>
               </ul>
-              <a href="mailto:hello@securospace.com" class="primary-button">Start now</a>
+              <button class="primary-button open-demo-modal" data-intent="pro-plan" style="width: 100%;">
+                Get Pro Access
+              </button>
             </article>
 
+            <!-- Family / Team Vaults -->
             <article class="price-card">
-              <p class="plan-name">Family</p>
-              <div class="price">$24<span>/month</span></div>
+              <p class="plan-name">Family &amp; Teams</p>
+              <p class="plan-desc">Secure household routines, shared finances, and credentials.</p>
+              <div class="price" id="priceFamily">$24<span>/mo</span></div>
               <ul>
-                <li>Shared family vaults</li>
-                <li>Collaborative planning</li>
-                <li>Advanced privacy controls</li>
+                <li>Up to 5 Private Encrypted Vaults</li>
+                <li>Shared Household Expense Ledger</li>
+                <li>Emergency Digital Inheritance Access</li>
+                <li>Collaborative Task Lists</li>
+                <li>Role-based access controls</li>
+                <li>Dedicated onboarding consultation</li>
               </ul>
-              <a href="mailto:hello@securospace.com" class="secondary-button">Contact sales</a>
+              <button class="secondary-button open-demo-modal" data-intent="family-plan" style="width: 100%;">
+                Contact Sales
+              </button>
             </article>
           </div>
         </div>
       </section>
 
-      <section id="faq" class="section alt-section faq-section">
+      <!-- Testimonials / Wall of Trust -->
+      <section class="section">
         <div class="container">
           <div class="section-heading narrow">
-            <p class="eyebrow">Questions</p>
-            <h2>Frequently asked.</h2>
+            <p class="eyebrow">Community Voices</p>
+            <h2>Trusted by people who value digital sovereignty.</h2>
+          </div>
+
+          <div class="testimonials-grid">
+            <article class="testimonial-card">
+              <p>
+                "SecuroSpace has replaced three separate monthly subscriptions for me. Having my daily tasks,
+                streaks, and financial cashflow under one local-first vault is liberating."
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">AK</div>
+                <div class="author-info">
+                  <strong>Alexandre K.</strong>
+                  <span>Systems Architect</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial-card">
+              <p>
+                "Finally, an app that doesn't demand my bank credentials or send analytics beacons on every click.
+                The zero-knowledge architecture is legit and mathematically sound."
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">SL</div>
+                <div class="author-info">
+                  <strong>Sarah L.</strong>
+                  <span>Cybersecurity Researcher</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial-card">
+              <p>
+                "The built-in Pomodoro sprint timer coupled with the habit tracker transformed my focus.
+                Knowing my personal data is locked to securospace.com and my own device gives total peace of mind."
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">MR</div>
+                <div class="author-info">
+                  <strong>Marcus R.</strong>
+                  <span>Independent Founder</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Frequently Asked Questions (FAQ) Section -->
+      <section id="faq" class="section alt-section">
+        <div class="container">
+          <div class="section-heading narrow">
+            <p class="eyebrow">Clear Answers</p>
+            <h2>Frequently asked questions.</h2>
+            <p class="section-lead">
+              Everything you need to know about our privacy design, cryptography, and domain operations.
+            </p>
+          </div>
+
+          <!-- FAQ Live Search Bar -->
+          <div class="faq-search-wrap">
+            <svg class="faq-search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+            <input
+              type="text"
+              id="faqSearch"
+              class="faq-search-input"
+              placeholder="Search questions (e.g. encryption, offline, export, domain)..."
+              aria-label="Filter frequently asked questions"
+            />
           </div>
 
           <div class="faq-list">
-            <details open>
-              <summary>What makes SecuroSpace different?</summary>
-              <p>It combines productivity and personal security in one private system, instead of forcing you to manage several disconnected tools.</p>
+            <details class="faq-item" open>
+              <summary>
+                <span>What makes SecuroSpace fundamentally different from Notion, Todoist, or 1Password?</span>
+                <span class="faq-toggle-icon">+</span>
+              </summary>
+              <p>
+                Most tools either focus solely on passwords or solely on notes, and virtually all of them store
+                your unencrypted habits, financial figures, and daily agendas on centralized cloud databases where
+                they can be scanned, indexed, or breached. SecuroSpace is a unified Life OS built on zero-knowledge
+                foundations: your four core pillars (Tasks, Habits, Cashflow, and Passwords) are encrypted
+                locally before touching storage.
+              </p>
             </details>
-            <details>
-              <summary>Is my data encrypted?</summary>
-              <p>Yes. SecuroSpace is designed around encrypted storage and privacy-first architecture to keep your information protected.</p>
+
+            <details class="faq-item">
+              <summary>
+                <span>Where is my data stored, and can SecuroSpace see it?</span>
+                <span class="faq-toggle-icon">+</span>
+              </summary>
+              <p>
+                By default, your data never leaves your browser’s local storage. When you enable encrypted sync,
+                only AES-256-GCM ciphertext is transferred. We do not possess the cryptographic keys to decipher
+                your records. We cannot view your tasks, read your passwords, or analyze your budget.
+              </p>
             </details>
-            <details>
-              <summary>Can I use it for personal and shared plans?</summary>
-              <p>Absolutely. Whether you want a solo dashboard or a shared family vault, the workspace scales to your needs.</p>
+
+            <details class="faq-item">
+              <summary>
+                <span>What happens if I lose my Master Passphrase?</span>
+                <span class="faq-toggle-icon">+</span>
+              </summary>
+              <p>
+                Because SecuroSpace employs authentic zero-knowledge cryptography, there is no back-door "Forgot Password"
+                reset button. We provide you with an Emergency Kit containing your cryptographic recovery phrase when you
+                initialize your vault. Keep this emergency key in a secure physical location or password safe.
+              </p>
+            </details>
+
+            <details class="faq-item">
+              <summary>
+                <span>Does SecuroSpace work completely offline?</span>
+                <span class="faq-toggle-icon">+</span>
+              </summary>
+              <p>
+                Yes! The entire core application is built as a Progressive Web App (PWA) with client-side execution.
+                You can add tasks, complete habits, balance expenses, and generate passwords without an internet connection.
+              </p>
+            </details>
+
+            <details class="faq-item">
+              <summary>
+                <span>How is securospace.com secured?</span>
+                <span class="faq-toggle-icon">+</span>
+              </summary>
+              <p>
+                The domain <code>securospace.com</code> is deployed with enforced HTTPS, TLS 1.3 encryption,
+                automated certificate renewals via GitHub Pages infrastructure, and strict Content Security Policies.
+              </p>
+            </details>
+
+            <details class="faq-item">
+              <summary>
+                <span>Can I export or migrate my data at any time?</span>
+                <span class="faq-toggle-icon">+</span>
+              </summary>
+              <p>
+                Absolutely. You have 100% data sovereignty. In the app settings, you can export your entire database
+                as an encrypted snapshot or as an open, standard JSON document with a single click.
+              </p>
             </details>
           </div>
+        </div>
+      </section>
+
+      <!-- Newsletter / Privacy Briefing Section -->
+      <section class="section">
+        <div class="container" style="text-align: center; max-width: 680px;">
+          <p class="eyebrow">Stay Sovereign</p>
+          <h2>The Zero-Knowledge Dispatch</h2>
+          <p class="section-lead" style="margin-bottom: 28px;">
+            Join over 12,000 privacy-conscious professionals. Receive monthly deep dives into personal cryptography,
+            digital self-defense, and sovereign productivity. Zero marketing spam.
+          </p>
+
+          <form id="newsletterForm" style="display: flex; gap: 10px; max-width: 480px; margin: 0 auto; flex-wrap: wrap;">
+            <input
+              type="email"
+              placeholder="Enter your private email address..."
+              required
+              class="form-input"
+              style="flex-grow: 1; min-width: 240px;"
+            />
+            <button type="submit" class="primary-button" style="white-space: nowrap;">
+              Subscribe
+            </button>
+          </form>
         </div>
       </section>
     </main>
 
+    <!-- Site Footer -->
     <footer class="site-footer">
-      <div class="container footer-wrap">
-        <div>
-          <a class="brand footer-brand" href="#top">
-            <span class="brand-mark">S</span>
-            <span>SecuroSpace</span>
-          </a>
+      <div class="container">
+        <div class="footer-grid">
+          <!-- Col 1: Brand & Domain -->
+          <div class="footer-brand-col">
+            <a class="brand" href="/" aria-label="SecuroSpace home">
+              <span class="brand-mark">S</span>
+              <span>SecuroSpace</span>
+            </a>
+            <p>
+              The privacy-first personal vault and Life OS. Your routines, data, and finances belong to you alone.
+            </p>
+            <div class="domain-pill">
+              <span>🌐</span>
+              <span>Domain: securospace.com</span>
+            </div>
+          </div>
+
+          <!-- Col 2: Product -->
+          <div class="footer-col">
+            <h4>Product</h4>
+            <ul class="footer-links-list">
+              <li><a href="app.html">Web App (Life OS)</a></li>
+              <li><a href="#features">Feature Matrix</a></li>
+              <li><a href="#pricing">Pricing Plans</a></li>
+              <li><a href="security.html">Security Architecture</a></li>
+              <li><a href="manifest.json">PWA Manifest</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 3: Resources -->
+          <div class="footer-col">
+            <h4>Resources</h4>
+            <ul class="footer-links-list">
+              <li><a href="security.html">Zero-Knowledge Whitepaper</a></li>
+              <li><a href="security.html#cryptography">Web Cryptography API</a></li>
+              <li><a href="#faq">Frequently Asked Questions</a></li>
+              <li><a href="https://github.com/Affan19261/securospace" target="_blank" rel="noopener">GitHub Repository</a></li>
+              <li><a href="sitemap.xml">XML Sitemap</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 4: Legal & Contact -->
+          <div class="footer-col">
+            <h4>Privacy &amp; Legal</h4>
+            <ul class="footer-links-list">
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="terms.html">Terms of Service</a></li>
+              <li><a href="mailto:hello@securospace.com">hello@securospace.com</a></li>
+              <li><a href="mailto:security@securospace.com">security@securospace.com</a></li>
+            </ul>
+          </div>
         </div>
 
-        <div class="footer-links">
-          <a href="#features">Features</a>
-          <a href="#security">Security</a>
-          <a href="#pricing">Pricing</a>
-        </div>
-
-        <div class="footer-meta">
-          <a href="mailto:hello@securospace.com">hello@securospace.com</a>
-          <span>© <span id="year"></span> SecuroSpace</span>
+        <div class="footer-bottom-bar">
+          <div>
+            <span>© <span id="year">2026</span> SecuroSpace (securospace.com). All rights reserved.</span>
+          </div>
+          <div style="display: flex; gap: 18px;">
+            <a href="privacy.html" style="color: var(--muted-soft);">Privacy</a>
+            <a href="terms.html" style="color: var(--muted-soft);">Terms</a>
+            <a href="security.html" style="color: var(--muted-soft);">Security Whitepaper</a>
+          </div>
         </div>
       </div>
     </footer>
+
+    <!-- Interactive Modal: Book Demo & Early Access -->
+    <div class="modal-backdrop" id="demoModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-card">
+        <button class="modal-close-btn" id="closeModalBtn" aria-label="Close modal">✕</button>
+        <h3 id="modalTitle">Experience SecuroSpace</h3>
+        <p>Reserve early access or request a personalized private walkthrough for your workflow.</p>
+
+        <form id="demoForm">
+          <div class="form-group">
+            <label for="modalName">Your Name</label>
+            <input type="text" id="modalName" class="form-input" placeholder="e.g. Alex Vance" required />
+          </div>
+
+          <div class="form-group">
+            <label for="modalEmail">Your Email</label>
+            <input type="email" id="modalEmail" class="form-input" placeholder="e.g. alex@example.com" required />
+          </div>
+
+          <div class="form-group">
+            <label for="modalIntent">Primary Interest</label>
+            <select id="modalIntent" class="form-select">
+              <option value="early-access">Early Access Invitation (Personal)</option>
+              <option value="pro-plan">Private Pro Plan Inquiries</option>
+              <option value="family-plan">Family / Team Vault Consultation</option>
+              <option value="security-audit">Security Architecture Questions</option>
+            </select>
+          </div>
+
+          <button type="submit" class="primary-button" style="width: 100%; margin-top: 8px;">
+            Confirm Reservation
+          </button>
+        </form>
+
+        <div class="modal-status-msg" id="modalSuccessMsg"></div>
+      </div>
+    </div>
+
+    <!-- Toast Notification Element -->
+    <div id="globalToast" class="toast-notification" role="status" aria-live="polite"></div>
 
     <script src="script.js"></script>
   </body>
