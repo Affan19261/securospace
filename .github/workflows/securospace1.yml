@@ -26,7 +26,7 @@ jobs:
 
       - name: 1. Verify File Integrity & Structure
         run: |
-          echo "Checking essential files for securospace.com..."
+          echo "Checking essential files for SecuroSpace..."
           required_files=(
             "index.html"
             "app.html"
@@ -37,7 +37,6 @@ jobs:
             "styles.css"
             "script.js"
             "app.js"
-            "CNAME"
             "manifest.json"
             "robots.txt"
             "sitemap.xml"
@@ -55,15 +54,14 @@ jobs:
             fi
           done
 
-      - name: 2. Verify Custom Domain Configuration
+      - name: 2. Verify Domain Configuration
         run: |
-          echo "Verifying CNAME..."
-          cname_content=$(cat CNAME | tr -d '[:space:]')
-          if [ "$cname_content" != "securospace.com" ]; then
-            echo "::error file=CNAME::CNAME must be 'securospace.com', found: '$cname_content'"
-            exit 1
+          if [ -f CNAME ]; then
+            cname_content=$(cat CNAME | tr -d '[:space:]')
+            echo "✓ Custom domain active: $cname_content"
+          else
+            echo "✓ Standard GitHub Pages mode (affan19261.github.io/securospace)"
           fi
-          echo "✓ CNAME correctly set to securospace.com"
 
       - name: 3. Validate JSON & Manifest Files
         run: |
@@ -81,7 +79,6 @@ jobs:
       - name: 4. Zero-Telemetry & Privacy Guarantee Audit
         run: |
           echo "Auditing for accidental third-party analytics or tracker scripts..."
-          # Ensure no unwanted trackers are embedded
           forbidden=("google-analytics.com" "googletagmanager.com" "connect.facebook.net" "hotjar.com" "segment.com")
           for tracker in "${forbidden[@]}"; do
             if grep -rn "$tracker" --include="*.html" --include="*.js" .; then
@@ -118,7 +115,6 @@ jobs:
               '/manifest.json',
               '/sitemap.xml',
               '/robots.txt',
-              '/CNAME',
               '/assets/favicon.svg',
               '/assets/og-preview.svg'
           ]
